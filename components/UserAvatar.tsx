@@ -23,7 +23,12 @@ function UserAvatar({
           className="rounded-full"
         />
       )}
-      <AvatarFallback>CN</AvatarFallback>
+      <AvatarFallback className = "dark:bg-white dark:text-black text-lg">
+        {name
+          ?.split("")
+          .map((n) => n[0])
+          .join("")}
+      </AvatarFallback>
     </Avatar>
   );
 }
