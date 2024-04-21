@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "./Logo";
-import { DarkModeToggle } from "./DarkModeToggle";
+import DarkModeToggle  from "./DarkModeToggle";
 
 
 function Header() {
