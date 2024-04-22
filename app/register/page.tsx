@@ -1,3 +1,4 @@
+'use client'
 import { authOptions } from "@/auth";
 import PricingCards from "@/components/PricingCards";
 import { getServerSession } from "next-auth";
