@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="">
-     
       <div className="py-12 sm:py-20 lg:pb-40">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {" "}
