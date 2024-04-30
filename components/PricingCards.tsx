@@ -85,15 +85,15 @@ function PricingCards({ redirect }: { redirect: boolean }) {
               ))}
             </ul>
           </div>
+
           {redirect ? (
-            <CheckoutButton />
+            <Link href="/register"
+               className="mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer disabled:opacity-80">
+                Get Started Today
+             
+            </Link>
           ) : (
-            <button
-              onClick={() => (window.location.href = "/register")}
-              className="mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font semibold landing-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus:visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer disabled:opacity-80"
-            >
-              Get Started Today
-            </button>
+            tier.id && <CheckoutButton />
           )}
         </div>
       ))}
