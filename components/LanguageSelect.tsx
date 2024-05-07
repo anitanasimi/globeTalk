@@ -8,7 +8,13 @@ import { usePathname } from "next/navigation";
 
 import { LanguageSupported } from "@/types";
 import Link from "next/link";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 import LoadingSpinner from "./LoadingSpinner";
 
 function LanguageSelect() {
@@ -19,11 +25,6 @@ function LanguageSelect() {
       state.getLanguages,
       state.getNonSupportedLangugages,
     ]);
-
-  const subscription = useSubscriptionStore((state) => state.subscription);
-
-  const isPro =
-    subscription?.role === "pro" && subscription?.status === "active";
 
   const pathName = usePathname();
   const isChatPage = pathName.includes("/chat");
@@ -41,29 +42,25 @@ function LanguageSelect() {
             />
           </SelectTrigger>
           <SelectContent>
-            {subscription === undefined ? (
-              <LoadingSpinner />
-            ) : (
-              <>
-                {getLanguages(isPro).map((language) => (
-                  <SelectItem key={language} value={language}>
-                    {LanguageSupportedMap[language]}
+            <>
+              {getLanguages(true).map((language) => (
+                <SelectItem key={language} value={language}>
+                  {LanguageSupportedMap[language]}
+                </SelectItem>
+              ))}
+              {getNotSupportedLanguages(true).map((language) => (
+                <Link href={"/register"} key={language} prefetch={false}>
+                  <SelectItem
+                    key={language}
+                    value={language}
+                    disabled
+                    className="bg-gray-300/50 text-gray-500 dark:text-white py-2 my-1"
+                  >
+                    {LanguageSupportedMap[language]} (PRO)
                   </SelectItem>
-                ))}
-                {getNotSupportedLanguages(isPro).map((language) => (
-                  <Link href={"/register"} key={language} prefetch={false}>
-                    <SelectItem
-                      key={language}
-                      value={language}
-                      disabled
-                      className="bg-gray-300/50 text-gray-500 dark:text-white py-2 my-1"
-                    >
-                      {LanguageSupportedMap[language]} (PRO)
-                    </SelectItem>
-                  </Link>
-                ))}
-              </>
-            )}
+                </Link>
+              ))}
+            </>
           </SelectContent>
         </Select>
       </div>
