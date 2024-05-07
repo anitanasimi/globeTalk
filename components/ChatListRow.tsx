@@ -1,12 +1,13 @@
 "use client";
-import { Skeleton } from "@/components/ui/skeleton";
-import { limitedSortedMessagesRef } from "@/lib/convertors/Message";
+
+import { limitedSortedMessagesRef } from "@/lib/converters/Message";
 import { useRouter } from "next/navigation";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import UserAvatar from "../header/UserAvatar";
 import { useSession } from "next-auth/react";
 import { IMessage } from "@/types";
 import { useLangugageStore } from "@/store/store";
+import { Skeleton } from "./ui/skeleton";
+import UserAvatar from "./UserAvatar";
 
 function ChatListRow({ chatId }: { chatId: string }) {
   const [messages, loading, error] = useCollectionData<IMessage>(
