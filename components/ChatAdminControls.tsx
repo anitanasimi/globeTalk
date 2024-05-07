@@ -1,6 +1,7 @@
 import { IChatAdminControlsProps } from "@/types";
-import DeleteChatButton from "../admincontrols/DeleteChatButton";
-import InviteUser from "../admincontrols/InviteUser";
+import InviteUser from "./InviteUser";
+import DeleteChatButton from "./DeleteChatButton";
+
 
 function ChatAdminControls({ chatId }: IChatAdminControlsProps) {
   return (
