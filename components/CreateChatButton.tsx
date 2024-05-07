@@ -57,7 +57,7 @@ function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
       setLoading(false)
     });
 
-    router.push(`/chat/abc`);
+    router.push(`/chat/${chatId}`);
   };
 
   if (isLarge)
