@@ -1,13 +1,10 @@
-// import { ILanguageState, LanguageSupported, SubscriptionState } from "../types/Subscription.tsx";
+import { ILanguageState, LanguageSupported, SubscriptionState } from "@/types";
 import { Subscription } from "@/types/Subscription";
 import { create } from "zustand";
 
+const LANGUAGES_IN_FREE = 2;
 
-
-export type LanguagesSupported = 
-|"en" | "zh" | "ru" | "de" | "es" | "fr" | "hi" | "ja" | "la" | "ar";
-
-export const LanguageSupportedMap: Record<LanguagesSupported, string> = {
+export const LanguageSupportedMap: Record<LanguageSupported, string> = {
   en: "English",
   de: "German",
   es: "Spanish",
@@ -20,13 +17,33 @@ export const LanguageSupportedMap: Record<LanguagesSupported, string> = {
   ar: "Arabic",
 };
 
-interface SubscriptionState {
-    subscription: Subscription |null | undefined
-    setSubscription: (subscription:Subscription | null ) => void;
-}
-
 export const useSubscriptionStore = create<SubscriptionState>((set) => ({
   subscription: undefined,
   setSubscription: (subscription: Subscription | null) => set({ subscription }),
 }));
 
+export const useLangugageStore = create<ILanguageState>()((set, get) => ({
+  language: "en",
+  setLanguage: (language: LanguageSupported) => {
+    set({ language });
+  },
+  getLanguages: (isPro: boolean) => {
+    //If the User is Pro, return all supported languages
+    if (isPro) return Object.keys(LanguageSupportedMap) as LanguageSupported[];
+
+    //if not pro, return only the first two languages
+    return Object.keys(LanguageSupportedMap).slice(
+      0,
+      LANGUAGES_IN_FREE
+    ) as LanguageSupported[];
+  },
+  getNonSupportedLangugages: (isPro: boolean) => {
+    //If the User is Pro, return null
+    if (isPro) return [];
+
+    //if not pro, return only the first two languages
+    return Object.keys(LanguageSupportedMap).slice(
+      LANGUAGES_IN_FREE
+    ) as LanguageSupported[];
+  },
+}));
