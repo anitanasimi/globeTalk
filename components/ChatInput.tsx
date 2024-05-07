@@ -14,11 +14,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { addDoc, getDocs, serverTimestamp } from "firebase/firestore";
-import { limitedMessagesRef, messageRef } from "@/lib/convertors/Message";
 import { useSubscriptionStore } from "@/store/store";
-import { useToast } from "../ui/use-toast";
+
 import { ToastAction } from "@radix-ui/react-toast";
 import { useRouter } from "next/navigation";
+import { limitedMessagesRef, messageRef } from "@/lib/converters/Message";
+import { useToast } from "./ui/use-toast";
 const formSchema = z.object({
   input: z.string().max(1000),
 });
@@ -36,7 +37,6 @@ function ChatInput({ chatId }: IChatInputProps) {
     if (!session?.user) return;
     if (values.input.length === 0) return;
 
-    //TODO: check if user is pro and limit them creating new chat
     const messages = (await getDocs(limitedMessagesRef(chatId))).docs.map(
       (doc) => doc.data()
     ).length;
