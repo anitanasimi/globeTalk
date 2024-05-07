@@ -1,12 +1,17 @@
 "use client";
 
-import useAdminId from "@/hooks/useAdminId";
-import { chatMembersRef } from "@/lib/convertors/ChatMembers";
+
+
 import { IChatMember, IChatMembersBadgesProps } from "@/types";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import LoadingSpinner from "../loaders/LoadingSpinner";
-import UserAvatar from "../header/UserAvatar";
-import { Badge } from "@/components/ui/badge";
+
+
+
+import UserAvatar from "./UserAvatar";
+import LoadingSpinner from "./LoadingSpinner";
+import { chatMembersRef } from "@/lib/converters/ChatMembers";
+import { Badge } from "./ui/badge";
+import useAdminId from "@/hooks/useAdminId";
 
 function ChatMembersBadges({ chatId }: IChatMembersBadgesProps) {
   const [members, loading, error] = useCollectionData<IChatMember>(
@@ -14,7 +19,7 @@ function ChatMembersBadges({ chatId }: IChatMembersBadgesProps) {
   );
   const adminId = useAdminId({ chatId });
 
-  if (!loading && !members) return <LoadingSpinner />;
+  if (loading && !members) return <LoadingSpinner />;
   return (
     !loading && (
       <div className="p-2 border rounded-xl ml-5">
