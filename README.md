@@ -16,7 +16,3 @@ LingoLink is a SaaS application designed to break down language barriers and fac
 ## Getting Started
 
 To get started with LingoLink, visit [https://lingolink-chat.vercel.app/](https://lingolink-chat.vercel.app/) and sign up for an account. Once logged in, you can create new chats, add people to the chat, and start communicating in multiple languages in real-time.
-
----
-
-Feel free to adjust the content as needed to better fit your project's details and requirements.
